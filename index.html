@@ -1,798 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miz Causevic Ã¢â‚¬â€ Director of Web Engineering Ã‚Â· Platform Architecture</title>
-<meta name="description" content="Platform engineering for production AI: reliability, identity, governance, decision intelligence. Director-level B2B SaaS technologist with 30 years across IBM, CyberArk, Alteryx, Digital.ai, Gryphon.ai.">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Miz Causevic — Director of Web Engineering · Platform Architecture</title>
+<meta name="description" content="Director of Web Engineering, Platform Architecture, B2B SaaS Technologist. 30 years across IBM, CyberArk, Alteryx, Digital.ai, Gryphon.ai. Polyglot platform stack, 4 live AI governance products at kineticgain.com." />
+<meta name="theme-color" content="#0B0C10" />
+<meta property="og:title" content="Miz Causevic — Director of Web Engineering" />
+<meta property="og:description" content="Polyglot platform engineering portfolio. 4 live AI governance products. 88 active repos across 15+ languages." />
+<meta property="og:type" content="website" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Person",
+  "name": "Miz Causevic",
+  "jobTitle": "Director of Web Engineering",
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Kinetic Gain"
+  },
+  "url": "https://mizcausevic-dev.github.io/",
+  "sameAs": [
+    "https://github.com/mizcausevic-dev",
+    "https://gv.kineticgain.com",
+    "https://mcp.kineticgain.com",
+    "https://rag.kineticgain.com",
+    "https://observe.kineticgain.com"
+  ],
+  "skills": [
+    "Python", "TypeScript", "Go", "Rust", "Java", "C#", "Kotlin",
+    "Scala", "Elixir", "Ruby", "PHP", "Dart", "SQL", "Terraform",
+    "Platform Engineering", "AI Governance", "SRE Primitives",
+    "SPIFFE Zero-Trust Identity", "Governance-as-Code"
+  ],
+  "knowsAbout": [
+    "AI Platform Engineering", "RAG Quality Monitoring",
+    "Agent Fleet Observability", "MCP Server Governance",
+    "LLM Router Architecture", "Token Cost Attribution"
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
 <style>
   :root {
-    --bg:        #0B0C10;
-    --surface:   #14161C;
-    --surface-2: #1F2833;
-    --rule:      #2A2F38;
-    --text:      #C5C6C7;
-    --text-dim:  #8A8F99;
-    --text-mute: #5C6270;
-    --accent:    #66FCF1;
-    --accent-2:  #45A29E;
-    --warm:      #FBBF24;
-    --good:      #34D399;
-    --bad:       #F87171;
-    --violet:    #A78BFA;
-
-    --serif:  'IBM Plex Serif', Georgia, serif;
-    --sans:   'IBM Plex Sans', -apple-system, sans-serif;
-    --mono:   'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    --bg: #0B0C10;
+    --surface: #11131A;
+    --surface-2: #161922;
+    --border: rgba(255,255,255,0.06);
+    --border-strong: rgba(255,255,255,0.12);
+    --text: #E5E7EB;
+    --text-dim: #94A3B8;
+    --text-faint: rgba(255,255,255,0.4);
+    --cyan: #66FCF1;
+    --teal: #45A29E;
+    --violet: #A78BFA;
+    --blue: #3B82F6;
+    --emerald: #10B981;
+    --amber: #FBBF24;
+    --rose: #F87171;
+    --pink: #EC4899;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: var(--sans);
-    font-weight: 400;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.6;
-    font-size: 16px;
-    min-height: 100vh;
-    background-image:
-      radial-gradient(circle at 15% 8%, rgba(102, 252, 241, 0.04) 0%, transparent 38%),
-      radial-gradient(circle at 88% 92%, rgba(69, 162, 158, 0.05) 0%, transparent 42%);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
-  /* Container */
-  .page {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 80px 48px 120px;
-  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem; }
 
-  /* ===== HEADER ===== */
-  header.masthead {
-    border-top: 2px solid var(--accent);
-    padding-top: 24px;
-    margin-bottom: 72px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 32px;
-    align-items: end;
+  /* HEADER */
+  header {
+    padding: 3rem 0 2rem;
+    border-bottom: 1px solid var(--border);
   }
-
-  .masthead-meta {
-    font-family: var(--mono);
-    font-size: 11px;
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-mute);
-    margin-bottom: 18px;
+    color: var(--cyan);
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  h1 em {
+    color: var(--cyan);
+    font-style: italic;
+    font-weight: 400;
+  }
+  .lede {
+    font-size: 1.15rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin-bottom: 2rem;
+  }
+  .meta-row {
     display: flex;
-    gap: 18px;
     flex-wrap: wrap;
+    gap: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-faint);
   }
+  .meta-row strong { color: var(--text); font-weight: 500; }
 
-  .masthead-meta span:not(:last-child)::after {
-    content: 'Ã‚Â·';
-    margin-left: 18px;
-    color: var(--rule);
-  }
-
-  h1.name {
-    font-family: var(--serif);
-    font-weight: 700;
-    font-size: clamp(48px, 7vw, 84px);
-    line-height: 0.95;
-    letter-spacing: -0.025em;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-
-  h1.name em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .role {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    line-height: 1.7;
-  }
-
-  .role .sep { color: var(--accent-2); margin: 0 6px; }
-
-  .header-stats {
-    text-align: right;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    line-height: 1.9;
-  }
-
-  .header-stats .num {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: 28px;
-    color: var(--accent);
-    letter-spacing: -0.02em;
-    text-transform: none;
-    display: block;
-  }
-
-  /* ===== THESIS ===== */
-  section.thesis {
-    margin-bottom: 88px;
-    border-left: 2px solid var(--accent);
-    padding-left: 32px;
-  }
-
-  .thesis p {
-    font-family: var(--serif);
-    font-size: clamp(20px, 2.4vw, 26px);
-    line-height: 1.45;
-    color: var(--text);
-    font-weight: 400;
-    max-width: 680px;
-  }
-
-  .thesis p strong {
-    font-weight: 600;
-    color: #E8E9EB;
-  }
-
-  /* ===== SECTION HEADERS ===== */
-  section { margin-bottom: 80px; }
-
+  /* SECTIONS */
+  section { padding: 4rem 0; border-bottom: 1px solid var(--border); }
   .section-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    letter-spacing: 0.22em;
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    color: var(--text-faint);
+    margin-bottom: 0.75rem;
   }
-
-  .section-label::before {
-    content: '';
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
-
   h2 {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(28px, 4vw, 40px);
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-size: 2rem;
     line-height: 1.15;
-    letter-spacing: -0.02em;
-    color: var(--text);
-    margin-bottom: 24px;
-    max-width: 760px;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
   }
-
-  h2 em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
+  h2 em { color: var(--cyan); font-style: italic; font-weight: 400; }
   .section-intro {
-    font-size: 16px;
     color: var(--text-dim);
-    line-height: 1.7;
-    max-width: 640px;
-    margin-bottom: 36px;
+    max-width: 720px;
+    margin-bottom: 2rem;
+    font-size: 1rem;
   }
 
-  /* ===== STACK DIAGRAM ===== */
-  .stack-diagram {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    padding: 32px 24px 24px;
-    margin-bottom: 28px;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-
-  .stack-diagram svg {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* ===== STACK TABLE ===== */
-  .stack-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-    margin-top: 0;
-  }
-
-  .stack-table thead th {
+  /* LIVE PRODUCTS TABLE */
+  .live-products-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+  .live-products-table th, .live-products-table td {
     text-align: left;
-    font-family: var(--mono);
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    color: var(--text-mute);
-    padding: 12px 16px 12px 0;
-    border-bottom: 1px solid var(--rule);
-    font-weight: 500;
-  }
-
-  .stack-table tbody td {
-    padding: 18px 16px 18px 0;
-    border-bottom: 1px solid var(--rule);
+    padding: 0.95rem 1rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
     vertical-align: top;
-    line-height: 1.55;
   }
-
-  .stack-table tbody tr:last-child td { border-bottom: none; }
-
-  .repo-name {
-    font-family: var(--mono);
-    font-weight: 500;
-    color: var(--accent);
-    font-size: 14px;
-    white-space: nowrap;
-  }
-
-  .surface-cell { color: var(--text); font-size: 14.5px; }
-
-  .buyer-tag {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 2px;
+  .live-products-table th {
+    color: var(--text-faint);
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    font-size: 0.7rem;
     font-weight: 600;
-    border: 1px solid currentColor;
   }
-  .buyer-tag.sre { color: var(--good); }
-  .buyer-tag.ciso { color: var(--bad); }
-  .buyer-tag.platform { color: var(--accent); }
-  .buyer-tag.mlops { color: var(--violet); }
-
-  .stack-caption {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--text-dim);
-    margin-top: 28px;
-    padding-top: 18px;
-    border-top: 1px solid var(--rule);
-    line-height: 1.7;
+  .live-products-table a.product-link {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: 600;
   }
-
-  .stack-caption strong {
-    color: var(--accent);
-    font-weight: 500;
+  .live-products-table a.product-link:hover { text-decoration: underline; }
+  .buyer-tag {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
+  .buyer-tag.eng   { background: rgba(102, 252, 241, 0.12); color: var(--cyan); }
+  .buyer-tag.ciso  { background: rgba(16, 185, 129, 0.15); color: var(--emerald); }
+  .buyer-tag.mlops { background: rgba(167, 139, 250, 0.15); color: var(--violet); }
+  .buyer-tag.sre   { background: rgba(59, 130, 246, 0.18); color: #60A5FA; }
 
-  /* ===== PILLARS ===== */
-  .pillars {
+  /* CAPABILITY MATRIX */
+  .matrix-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
-    border-radius: 4px;
-    overflow: hidden;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
   }
-
-  .pillar {
+  @media (max-width: 768px) { .matrix-grid { grid-template-columns: 1fr; } }
+  .panel {
     background: var(--surface);
-    padding: 24px 24px 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
   }
-
-  .pillar-num {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 14px;
-    color: var(--accent);
-    margin-bottom: 8px;
-    display: block;
+  .panel-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.4rem;
   }
-
-  .pillar h3 {
-    font-family: var(--serif);
-    font-size: 18px;
+  .panel-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.3;
+    margin-bottom: 1rem;
+  }
+  .panel-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    margin-right: 0.6rem;
+    vertical-align: middle;
   }
 
-  .pillar p {
-    font-size: 13.5px;
+  /* signal bars */
+  .signal-row {
+    margin-bottom: 1.5rem;
+  }
+  .signal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .signal-name {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+  .signal-level {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--blue);
+  }
+  .signal-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+  }
+  .signal-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--cyan), var(--blue));
+    border-radius: 2px;
+  }
+  .signal-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* TARGET ECOSYSTEMS */
+  .ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.85rem;
+    margin: 1.5rem 0;
+  }
+  .ecosystem-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+  }
+  .ecosystem-card:hover { border-color: var(--blue); }
+  .ecosystem-card .meta-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .eco-pill {
+    width: 3px;
+    height: 28px;
+    background: var(--blue);
+    border-radius: 2px;
+  }
+  .eco-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--text-dim);
+    margin-bottom: 0.2rem;
+  }
+  .eco-count {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .eco-suffix {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* POLYGLOT TABLE */
+  .polyglot-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+  .polyglot-table th, .polyglot-table td {
+    text-align: left;
+    padding: 0.7rem 0.85rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    vertical-align: top;
+  }
+  .polyglot-table th {
+    color: var(--text-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.65rem;
+    font-weight: 600;
+  }
+  .lang-pill {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    letter-spacing: 0.04em;
+  }
+  .polyglot-table a {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+  .polyglot-table a:hover { text-decoration: underline; }
+  .lang-py    { background: rgba(102, 252, 241, 0.10); color: var(--cyan); }
+  .lang-ts    { background: rgba(59, 130, 246, 0.15); color: #60A5FA; }
+  .lang-go    { background: rgba(0, 200, 255, 0.12); color: #38BDF8; }
+  .lang-rust  { background: rgba(251, 146, 60, 0.15); color: #FB923C; }
+  .lang-java  { background: rgba(239, 68, 68, 0.12); color: #F87171; }
+  .lang-cs    { background: rgba(139, 92, 246, 0.15); color: var(--violet); }
+  .lang-kotlin { background: rgba(167, 139, 250, 0.15); color: #C4B5FD; }
+  .lang-scala { background: rgba(220, 38, 38, 0.12); color: #FCA5A5; }
+  .lang-elixir { background: rgba(167, 139, 250, 0.12); color: #DDD6FE; }
+  .lang-ruby  { background: rgba(239, 68, 68, 0.12); color: #F87171; }
+  .lang-php   { background: rgba(99, 102, 241, 0.15); color: #818CF8; }
+  .lang-dart  { background: rgba(34, 211, 238, 0.12); color: #22D3EE; }
+  .lang-tf    { background: rgba(139, 92, 246, 0.15); color: #A78BFA; }
+  .lang-dbt   { background: rgba(251, 146, 60, 0.12); color: #FB923C; }
+  .lang-sql   { background: rgba(34, 197, 94, 0.12); color: #4ADE80; }
+
+  /* JSON-LD VIEWER */
+  .json-block {
+    background: #0a0c11;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    overflow-x: auto;
+    white-space: pre;
+  }
+  .jk { color: var(--emerald); }
+  .jv { color: #FB923C; }
+  .jp { color: var(--text); }
+
+  /* STACK STRIPE */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+  @media (max-width: 768px) { .stack-grid { grid-template-columns: 1fr; } }
+  .stack-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+  }
+  .stack-card h3 {
+    font-family: 'IBM Plex Serif', Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+  .stack-card-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.5rem;
+  }
+  .stack-card-body {
+    color: var(--text-dim);
+    font-size: 0.9rem;
     line-height: 1.6;
   }
 
-  /* ===== PROOF ===== */
-  .proof-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
+  /* CTA */
+  .cta {
+    background: linear-gradient(135deg, var(--surface), var(--surface-2));
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin: 2rem 0;
+    text-align: center;
   }
-
-  .proof-item {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 32px;
-    padding: 24px 0;
-    border-top: 1px solid var(--rule);
-  }
-
-  .proof-item:last-child {
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .proof-num {
-    font-family: var(--serif);
-    font-size: 36px;
-    line-height: 1;
-    color: var(--accent);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
-
-  .proof-num small {
-    display: block;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    margin-top: 8px;
-    font-weight: 400;
-  }
-
-  .proof-body h3 {
-    font-family: var(--serif);
-    font-size: 18px;
-    color: var(--text);
-    font-weight: 600;
-    margin-bottom: 6px;
-  }
-
-  .proof-body p {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.65;
-  }
-
-  .proof-body .where {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--accent-2);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-top: 10px;
-  }
-
-  /* ===== CAREER LINE ===== */
-  .career-line {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--text-dim);
-    margin-top: 32px;
-    padding: 18px 24px;
-    background: var(--surface);
-    border-left: 2px solid var(--accent-2);
-    line-height: 1.9;
-  }
-
-  .career-line strong { color: var(--text); font-weight: 500; }
-  .career-line .arrow { color: var(--accent); margin: 0 8px; }
-
-  /* ===== FOOTER / CTA ===== */
-  section.cta {
-    margin-top: 96px;
-    padding-top: 48px;
-    border-top: 2px solid var(--accent);
-  }
-
-  .cta-headline {
-    font-family: var(--serif);
-    font-size: clamp(24px, 3vw, 32px);
-    font-weight: 600;
-    color: var(--text);
-    line-height: 1.2;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
-  }
-
-  .cta-headline em {
-    font-style: italic;
-    color: var(--accent);
-    font-weight: 400;
-  }
-
-  .cta-detail {
-    font-size: 15px;
-    color: var(--text-dim);
-    line-height: 1.7;
-    margin-bottom: 32px;
-    max-width: 600px;
-  }
-
-  .cta-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px;
-  }
-
-  .cta-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 14px 22px;
-    border: 1px solid var(--rule);
-    background: var(--surface);
-    color: var(--text);
-    text-decoration: none;
-    font-family: var(--mono);
-    font-size: 13px;
-    border-radius: 2px;
-    transition: all 180ms ease;
-  }
-
-  .cta-link:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-1px);
-  }
-
-  .cta-link.primary {
-    background: var(--accent);
+  .cta h2 { margin-bottom: 1rem; }
+  .cta a {
+    display: inline-block;
+    background: var(--cyan);
     color: var(--bg);
-    border-color: var(--accent);
-    font-weight: 600;
-  }
-  .cta-link.primary:hover {
-    background: transparent;
-    color: var(--accent);
-  }
-
-  /* ===== COLOPHON ===== */
-  .colophon {
-    margin-top: 72px;
-    padding-top: 24px;
-    border-top: 1px solid var(--rule);
-    display: flex;
-    justify-content: space-between;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--text-mute);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-  }
-
-  /* ===== INLINE EMPHASIS ===== */
-  a.inline {
-    color: var(--accent);
+    padding: 0.85rem 1.75rem;
+    border-radius: 6px;
     text-decoration: none;
-    border-bottom: 1px solid rgba(102, 252, 241, 0.3);
-    transition: border-color 150ms;
+    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0.25rem;
+    transition: transform 0.1s, background 0.2s;
   }
-  a.inline:hover { border-color: var(--accent); }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 720px) {
-    .page { padding: 48px 24px 80px; }
-    header.masthead { grid-template-columns: 1fr; gap: 24px; }
-    .header-stats { text-align: left; }
-    .stack-table { font-size: 13px; }
-    .stack-table tbody td { padding: 14px 12px 14px 0; }
-    .repo-name { font-size: 12.5px; white-space: normal; }
-    .proof-item { grid-template-columns: 1fr; gap: 12px; }
-    .proof-num { font-size: 30px; }
-    section.thesis { padding-left: 20px; }
+  .cta a:hover { background: #88FFF5; transform: translateY(-1px); }
+  .cta a.ghost {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
   }
+  .cta a.ghost:hover { background: rgba(102, 252, 241, 0.08); color: var(--cyan); }
 
-  /* ===== PRINT ===== */
+  /* FOOTER */
+  footer {
+    padding: 3rem 0 4rem;
+    text-align: center;
+    color: var(--text-faint);
+    font-size: 0.85rem;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* PRINT */
   @media print {
-    body {
-      background: white !important;
-      color: black !important;
-      background-image: none !important;
-    }
-    .page { padding: 24px; max-width: 100%; }
-    h1.name, h2, h3, .thesis p, .pillar h3, .proof-body h3 { color: black !important; }
-    .surface, .surface-2, .stack-diagram, .pillar, .career-line {
-      background: white !important;
-      border-color: #ccc !important;
-    }
-    .accent, .repo-name, .proof-num, .pillar-num, h1.name em, h2 em,
-    .cta-headline em, .section-label, .stack-caption strong { color: #007a76 !important; }
-    .text-dim, .text-mute, .role, .stack-caption, .career-line, .pillar p, .proof-body p, .cta-detail { color: #444 !important; }
-    .cta-link { background: white !important; color: black !important; border-color: #999 !important; }
-    .cta-link.primary { background: #007a76 !important; color: white !important; }
-    section { page-break-inside: avoid; }
-    a { color: #007a76 !important; }
+    body { background: white; color: #111; }
+    .cta a, footer a { color: #0066CC; }
+    section { border-color: #ccc; page-break-inside: avoid; }
+    .panel, .ecosystem-card, .stack-card { border-color: #ccc; background: white; }
+    .json-block { background: #f8f8f8; color: #333; border: 1px solid #ddd; }
   }
-
-  /* ===== ENTRY ANIMATION ===== */
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  header.masthead, section { animation: rise 600ms ease-out backwards; }
-  header.masthead { animation-delay: 0ms; }
-  section.thesis { animation-delay: 80ms; }
-  section:nth-of-type(2) { animation-delay: 140ms; }
-  section:nth-of-type(3) { animation-delay: 180ms; }
-  section:nth-of-type(4) { animation-delay: 220ms; }
-  section:nth-of-type(5) { animation-delay: 260ms; }
-  section:nth-of-type(6) { animation-delay: 300ms; }
-    .live-products-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
-    .live-products-table th, .live-products-table td { text-align: left; padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; }
-    .live-products-table th { color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7rem; font-weight: 600; }
-    .live-products-table a.product-link { font-family: 'IBM Plex Mono', monospace; color: #66FCF1; text-decoration: none; font-weight: 600; }
-    .live-products-table a.product-link:hover { text-decoration: underline; }
-    .buyer-tag { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 3px; font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
-    .buyer-tag.eng { background: rgba(102, 252, 241, 0.12); color: #66FCF1; }
-    .buyer-tag.ciso { background: rgba(16, 185, 129, 0.15); color: #10B981; }
-    .buyer-tag.mlops { background: rgba(167, 139, 250, 0.15); color: #A78BFA; }
-    .buyer-tag.sre { background: rgba(59, 130, 246, 0.18); color: #60A5FA; }
-  </style>
+</style>
 </head>
-
 <body>
 
-<div class="page">
-
-  <!-- ============== HEADER ============== -->
-  <header class="masthead">
-    <div>
-      <div class="masthead-meta">
-        <span>Boston, MA</span>
-        <span>~30 years in enterprise tech</span>
-        <span>Available now</span>
-      </div>
-      <h1 class="name">Miz <em>Causevic</em></h1>
-      <div class="role">
-        Director of Web Engineering
-        <span class="sep">Ã‚Â·</span> Platform Architecture
-        <span class="sep">Ã‚Â·</span> B2B SaaS Technologist
-      </div>
+<header>
+  <div class="container">
+    <div class="eyebrow">DIRECTOR / PRINCIPAL · PLATFORM ENGINEERING</div>
+    <h1>Miz Causevic <em>—</em> infrastructure for production AI.</h1>
+    <p class="lede">The layer between agent fleets and the people who run them. Reliability primitives, identity governance, AI observability, decision intelligence. <strong>Polyglot by choice</strong> — the language fits the problem, not the resume.</p>
+    <div class="meta-row">
+      <span>📍 <strong>Boston, MA</strong></span>
+      <span>⏱️ <strong>~30 years</strong> across IBM, CyberArk, Alteryx, Digital.ai, Gryphon.ai</span>
+      <span>🌐 East Coast time · remote-friendly</span>
     </div>
-    <div class="header-stats">
-      <span class="num">60+</span>
-      Open-source repos
-    </div>
-  </header>
+  </div>
+</header>
 
-  <!-- ============== THESIS ============== -->
-  <section class="thesis">
-    <p>I ship <strong>platform infrastructure for production AI</strong> &mdash; the layer between agent fleets and the people who run them. Reliability, identity, governance, decision intelligence. Python primitives, FastAPI engines, React operator surfaces. Audit trails on everything.</p>
-  </section>
-
-  <!-- ============== PLATFORM STACK ============== -->
-  <section>
-    <div class="section-label">Recent Work</div>
-    <h2>A four-piece <em>Platform Reliability Stack</em> for AI agents.</h2>
-    <p class="section-intro">Each repo independent. All designed to compose. Defense-in-depth from identity at the edge to the model registry as source of truth.</p>
-
-    <div class="stack-diagram" aria-label="Platform stack architecture">
-      <svg viewBox="0 0 880 280" xmlns="http://www.w3.org/2000/svg" font-family="'IBM Plex Mono', ui-monospace, monospace">
-        <defs>
-          <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-            <polygon points="0 0, 10 3, 0 6" fill="#66FCF1"/>
-          </marker>
-        </defs>
-
-        <!-- Top label -->
-        <text x="440" y="28" text-anchor="middle" fill="#5C6270" font-size="10" letter-spacing="2">REQUEST FLOW</text>
-
-        <!-- Identity layer -->
-        <g>
-          <rect x="40" y="60" width="180" height="100" rx="3" fill="#1F2833" stroke="#F87171" stroke-width="1.2"/>
-          <text x="130" y="92" text-anchor="middle" fill="#F87171" font-size="11" font-weight="600" letter-spacing="1.5">CISO</text>
-          <text x="130" y="120" text-anchor="middle" fill="#66FCF1" font-size="14" font-weight="500">identity-mesh</text>
-          <text x="130" y="140" text-anchor="middle" fill="#8A8F99" font-size="11">SPIFFE JWT-SVID broker</text>
-        </g>
-
-        <!-- Rate limit layer -->
-        <g>
-          <rect x="240" y="60" width="180" height="100" rx="3" fill="#1F2833" stroke="#34D399" stroke-width="1.2"/>
-          <text x="330" y="92" text-anchor="middle" fill="#34D399" font-size="11" font-weight="600" letter-spacing="1.5">SRE</text>
-          <text x="330" y="120" text-anchor="middle" fill="#66FCF1" font-size="14" font-weight="500">rate-limit-shield</text>
-          <text x="330" y="140" text-anchor="middle" fill="#8A8F99" font-size="11">Bucket + breaker + retry</text>
-        </g>
-
-        <!-- Canary layer -->
-        <g>
-          <rect x="440" y="60" width="180" height="100" rx="3" fill="#1F2833" stroke="#66FCF1" stroke-width="1.2"/>
-          <text x="530" y="92" text-anchor="middle" fill="#66FCF1" font-size="11" font-weight="600" letter-spacing="1.5">PLATFORM / SRE</text>
-          <text x="530" y="120" text-anchor="middle" fill="#66FCF1" font-size="14" font-weight="500">agent-canary</text>
-          <text x="530" y="140" text-anchor="middle" fill="#8A8F99" font-size="11">Progressive rollout FSM</text>
-        </g>
-
-        <!-- Registry layer -->
-        <g>
-          <rect x="640" y="60" width="180" height="100" rx="3" fill="#1F2833" stroke="#A78BFA" stroke-width="1.2"/>
-          <text x="730" y="92" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="600" letter-spacing="1.5">PLATFORM / MLOps</text>
-          <text x="730" y="120" text-anchor="middle" fill="#66FCF1" font-size="14" font-weight="500">model-registry-pro</text>
-          <text x="730" y="140" text-anchor="middle" fill="#8A8F99" font-size="11">Lineage + approval gates</text>
-        </g>
-
-        <!-- Connecting arrows -->
-        <line x1="220" y1="110" x2="240" y2="110" stroke="#66FCF1" stroke-width="1.2" marker-end="url(#arr)"/>
-        <line x1="420" y1="110" x2="440" y2="110" stroke="#66FCF1" stroke-width="1.2" marker-end="url(#arr)"/>
-        <line x1="620" y1="110" x2="640" y2="110" stroke="#66FCF1" stroke-width="1.2" marker-end="url(#arr)"/>
-
-        <!-- Bottom annotation -->
-        <line x1="40" y1="200" x2="820" y2="200" stroke="#2A2F38" stroke-width="1"/>
-        <text x="40" y="226" fill="#5C6270" font-size="10" letter-spacing="2">FOUNDATION</text>
-        <text x="40" y="248" fill="#C5C6C7" font-size="13">Zero runtime deps in core (rate-limit-shield, agent-canary)</text>
-        <text x="40" y="266" fill="#C5C6C7" font-size="13">Standard libraries only where security matters (identity-mesh: pyjwt + cryptography)</text>
-      </svg>
-    </div>
-
-    <table class="stack-table">
-      <thead>
-        <tr>
-          <th style="width: 200px;">Repository</th>
-          <th>Surface</th>
-          <th style="width: 140px;">Buyer</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><a class="repo-name" href="https://github.com/mizcausevic-dev/rate-limit-shield">rate-limit-shield</a></td>
-          <td class="surface-cell">Token bucket + circuit breaker + jittered retry, HTTP&nbsp;429&nbsp;/&nbsp;Retry-After awareness for LLM APIs.</td>
-          <td><span class="buyer-tag sre">SRE</span></td>
-        </tr>
-        <tr>
-          <td><a class="repo-name" href="https://github.com/mizcausevic-dev/identity-mesh">identity-mesh</a></td>
-          <td class="surface-cell">SPIFFE-style JWT-SVID broker for AI agents. Short-lived, audience-bound, zero long-lived API keys.</td>
-          <td><span class="buyer-tag ciso">CISO</span></td>
-        </tr>
-        <tr>
-          <td><a class="repo-name" href="https://github.com/mizcausevic-dev/agent-canary">agent-canary</a></td>
-          <td class="surface-cell">Progressive rollout, shadow mode, sticky-percent routing, auto-rollback driven by real metrics.</td>
-          <td><span class="buyer-tag platform">PLATFORM</span></td>
-        </tr>
-        <tr>
-          <td><a class="repo-name" href="https://github.com/mizcausevic-dev/model-registry-pro">model-registry-pro</a></td>
-          <td class="surface-cell">Model lifecycle catalog with lineage, stage promotion, audit-trailed approval gates.</td>
-          <td><span class="buyer-tag mlops">PLATFORM&nbsp;/&nbsp;MLOps</span></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="stack-caption">All four repos: <strong>MIT-licensed</strong> Ã‚Â· <strong>CI green on Python 3.10/3.11/3.12</strong> Ã‚Â· <strong>architecture diagrams committed</strong> Ã‚Â· <strong>doctrine-led READMEs</strong>.</div>
-  </section>
-
-  <!-- ============== WHAT I BUILD ============== -->
-  <section>
-    <div class="section-label">How I Operate</div>
-    <h2>End-to-end across <em>four planes</em>.</h2>
-    <p class="section-intro">I work the full stack of platform engineering. Not abstractions on a slide &mdash; real shipping code with tests, CI, and documentation, organized by who consumes it.</p>
-
-    <div class="pillars">
-      <div class="pillar">
-        <span class="pillar-num">i.</span>
-        <h3>Reliability primitives</h3>
-        <p>Token buckets, circuit breakers, retry policies, canary FSMs. The fail-fast layer between agents and the upstream services that occasionally betray them.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">ii.</span>
-        <h3>Identity &amp; governance</h3>
-        <p>SPIFFE-style workload identity, audit-trailed approval workflows, governance-as-code with compliance mappings. SOC&nbsp;2, EU&nbsp;AI Act, ISO&nbsp;27001, NIST.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">iii.</span>
-        <h3>Decision intelligence</h3>
-        <p>FastAPI engines for executive briefing, signal orchestration, risk scoring, action sequencing. Python on the data plane, OpenAPI on the wire.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">iv.</span>
-        <h3>Operator surfaces</h3>
-        <p>React + TypeScript control planes, executive dashboards, decision studios. The front-of-house layer where humans actually make calls.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== PROOF ============== -->
-  <section>
-    <div class="section-label">Proof</div>
-    <h2>Track record at <em>scale</em>.</h2>
-
-    <div class="proof-grid">
-      <div class="proof-item">
-        <div class="proof-num">
-          1,712&times;
-          <small>Network performance</small>
-        </div>
-        <div class="proof-body">
-          <h3>Sitecore &rarr; WordPress migration</h3>
-          <p>Architected and led an enterprise web platform migration that delivered 1,712x network performance improvement with 38% YoY operational cost savings. Migration patterns now reusable across the platform org.</p>
-          <div class="where">@ Alteryx</div>
-        </div>
-      </div>
-
-      <div class="proof-item">
-        <div class="proof-num">
-          37+
-          <small>Platforms shipped</small>
-        </div>
-        <div class="proof-body">
-          <h3>Enterprise platforms across IBM, CyberArk, Alteryx, Digital.ai</h3>
-          <p>Three decades of shipping at scale. Web platforms, brand systems, performance engineering, SEO governance, internal tooling. Built the muscle for what to keep simple and what to instrument deeply.</p>
-          <div class="where">5 Companies, 30 years</div>
-        </div>
-      </div>
-
-      <div class="proof-item">
-        <div class="proof-num">
-          60+
-          <small>Open-source repos</small>
-        </div>
-        <div class="proof-body">
-          <h3>Public portfolio of platform engineering work</h3>
-          <p>Every recent engineering pattern is documented, tested, and published under MIT. Platform reliability stack for AI agents, governance-as-code, decision intelligence engines, operator surfaces. Architecture diagrams and doctrine-led READMEs throughout.</p>
-          <div class="where">github.com/mizcausevic-dev</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="career-line">
-      <strong>Career timeline:</strong> IBM <span class="arrow">&rarr;</span> CyberArk <span class="arrow">&rarr;</span> Alteryx <span class="arrow">&rarr;</span> Digital.ai <span class="arrow">&rarr;</span> Gryphon.ai <span class="arrow">&rarr;</span> Open
-    </div>
-  </section>
-
-  <!-- ============== STACK ============== -->
-  <section>
-    <div class="section-label">Stack</div>
-    <h2>Tools, <em>opinionated</em>.</h2>
-    <p class="section-intro">Optimized for clarity over cleverness. Spec-first APIs, TDD where it matters, audit-ready by default.</p>
-
-    <div class="pillars">
-      <div class="pillar">
-        <span class="pillar-num">Languages</span>
-        <h3>Python Ã‚Â· TypeScript Ã‚Â· SQL Ã‚Â· Bash</h3>
-        <p>Polyglot fluency. Python for reliability primitives and data planes. TypeScript for control planes, APIs, operator UIs. PostgreSQL for everything that needs to survive a deploy.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">Backend</span>
-        <h3>FastAPI Ã‚Â· Express Ã‚Â· Hatchling Ã‚Â· GitHub Actions</h3>
-        <p>Spec-first OpenAPI, Pydantic validation, packaging-aware deploys. CI as a feature, not an afterthought.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">Frontend</span>
-        <h3>React Ã‚Â· TypeScript Ã‚Â· Vite Ã‚Â· Tailwind Ã‚Â· Recharts</h3>
-        <p>Fast iteration loops, component-driven design systems, type-safe data plumbing. Built for operators, not designers.</p>
-      </div>
-      <div class="pillar">
-        <span class="pillar-num">Reliability</span>
-        <h3>SRE primitives Ã‚Â· Zero-trust identity Ã‚Â· Governance-as-code</h3>
-        <p>Buckets, breakers, retries, canaries, SPIFFE, policy engines, compliance mappings. The boring stuff that keeps things up at 3 AM.</p>
-      </div>
-    </div>
-  </section>
-
-
-    <!-- ============== LIVE PRODUCTS ============== -->
-  <section>
+<!-- CURRENTLY LIVE -->
+<section>
+  <div class="container">
     <div class="section-label">Currently Live</div>
     <h2>Four <em>live products</em> showcasing the platform thesis.</h2>
     <p class="section-intro">Productized open-source dashboards for AI infrastructure governance, agent fleet observability, and developer portfolio intelligence. Each one a different buyer, each one a working URL. All push-to-deploy via GitHub Actions FTP CI/CD.</p>
@@ -808,55 +511,363 @@
       <tbody>
         <tr>
           <td><a class="product-link" href="https://gv.kineticgain.com">gv.kineticgain.com</a></td>
-          <td>GitVisualizer &mdash; type any GitHub username, get a recruiter-grade visual portfolio in 30 seconds.</td>
+          <td>GitVisualizer — type any GitHub username, get a recruiter-grade visual portfolio in 30 seconds.</td>
           <td><span class="buyer-tag eng">ENGINEERING</span></td>
         </tr>
         <tr>
           <td><a class="product-link" href="https://mcp.kineticgain.com">mcp.kineticgain.com</a></td>
-          <td>MCP Sentinel &mdash; governance dashboard for Model Context Protocol servers. Tool surface audits, schema drift, posture scoring.</td>
+          <td>MCP Sentinel — governance dashboard for Model Context Protocol servers. Tool surface audits, schema drift, posture scoring.</td>
           <td><span class="buyer-tag ciso">CISO</span></td>
         </tr>
         <tr>
           <td><a class="product-link" href="https://rag.kineticgain.com">rag.kineticgain.com</a></td>
-          <td>RAG Sentinel &mdash; hallucination detection, source freshness, citation quality, drift monitoring for enterprise RAG systems.</td>
+          <td>RAG Sentinel — hallucination detection, source freshness, citation quality, drift monitoring for enterprise RAG systems.</td>
           <td><span class="buyer-tag mlops">ML / AI OPS</span></td>
         </tr>
         <tr>
           <td><a class="product-link" href="https://observe.kineticgain.com">observe.kineticgain.com</a></td>
-          <td>AgentObserve &mdash; operator console for AI agent fleets. Runs, traces, cost budgets, SLA scoring, regression detection.</td>
+          <td>AgentObserve — operator console for AI agent fleets. Runs, traces, cost budgets, SLA scoring, regression detection.</td>
           <td><span class="buyer-tag sre">SRE</span></td>
         </tr>
       </tbody>
     </table>
 
-    <p class="section-intro" style="margin-top: 1rem; opacity: 0.7; font-size: 0.85rem;">All four: <strong>React 19 + TypeScript</strong> &middot; <strong>AGPL-3.0</strong> &middot; <strong>CI green</strong> &middot; <strong>open source</strong> &middot; deployed on kineticgain.com subdomains.</p>
-  </section>
-<!-- ============== CTA ============== -->
-  <section class="cta">
-    <div class="section-label">Working interest</div>
-    <div class="cta-headline">Open to <em>Director / Principal-level</em> Platform Engineering, Web Engineering, or AI Platform roles.</div>
-    <p class="cta-detail">Enterprise B2B SaaS. East Coast time zone. Remote-friendly. Fastest path to a conversation is a direct message; the portfolio is public if you want to scout the work first.</p>
-
-    <div class="cta-links">
-      <a href="mailto:miz@kineticgain.com" class="cta-link primary">
-        miz@kineticgain.com
-      </a>
-      <a href="https://github.com/mizcausevic-dev" class="cta-link">
-        github.com/mizcausevic-dev
-      </a>
-      <a href="https://www.linkedin.com/in/mirzacausevic/" class="cta-link">
-        LinkedIn
-      </a>
-    </div>
-  </section>
-
-  <!-- ============== COLOPHON ============== -->
-  <div class="colophon">
-    <span>Set in IBM Plex</span>
-    <span>Updated 2026 &middot; v1</span>
+    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">All four:</strong> React 19 + TypeScript · AGPL-3.0 · CI green · push-to-deploy via FTP Action · open source.</p>
   </div>
+</section>
 
-</div>
+<!-- CAPABILITY MATRIX -->
+<section>
+  <div class="container">
+    <div class="section-label">Capability Matrix</div>
+    <h2>Authority &amp; <em>signal strength</em>.</h2>
+    <p class="section-intro">Verified expertise across the four pillars of production AI platform engineering. Signal strength reflects activity depth, output coherence, and shipped surface area over the last 24 months.</p>
+
+    <div class="matrix-grid">
+      <div class="panel">
+        <div class="panel-label">DOMAIN EXPERTISE</div>
+        <div class="panel-title">Authority &amp; Reach</div>
+
+        <div class="signal-row">
+          <div class="signal-header">
+            <span class="signal-name">⚙️&nbsp;&nbsp;Platform Engineering</span>
+            <span class="signal-level">PRINCIPAL</span>
+          </div>
+          <div class="signal-bar"><div class="signal-bar-fill" style="width: 96%; background: linear-gradient(90deg, var(--cyan), var(--blue));"></div></div>
+          <div class="signal-meta"><span>Signal Strength</span><span>96% Coherence</span></div>
+        </div>
+
+        <div class="signal-row">
+          <div class="signal-header">
+            <span class="signal-name">🧠&nbsp;&nbsp;AI Governance</span>
+            <span class="signal-level" style="color: var(--violet);">ARCHITECT</span>
+          </div>
+          <div class="signal-bar"><div class="signal-bar-fill" style="width: 92%; background: linear-gradient(90deg, var(--violet), var(--blue));"></div></div>
+          <div class="signal-meta"><span>Signal Strength</span><span>92% Coherence</span></div>
+        </div>
+
+        <div class="signal-row">
+          <div class="signal-header">
+            <span class="signal-name">🛡️&nbsp;&nbsp;SRE / Reliability</span>
+            <span class="signal-level" style="color: var(--emerald);">EXPERT</span>
+          </div>
+          <div class="signal-bar"><div class="signal-bar-fill" style="width: 90%; background: linear-gradient(90deg, var(--emerald), var(--cyan));"></div></div>
+          <div class="signal-meta"><span>Signal Strength</span><span>90% Coherence</span></div>
+        </div>
+
+        <div class="signal-row" style="margin-bottom: 0;">
+          <div class="signal-header">
+            <span class="signal-name">🔐&nbsp;&nbsp;Identity / Security</span>
+            <span class="signal-level" style="color: #60A5FA;">LEAD</span>
+          </div>
+          <div class="signal-bar"><div class="signal-bar-fill" style="width: 88%; background: linear-gradient(90deg, #60A5FA, var(--violet));"></div></div>
+          <div class="signal-meta"><span>Signal Strength</span><span>88% Coherence</span></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-label">PERFORMANCE VECTOR</div>
+        <div class="panel-title">Velocity &amp; Authority</div>
+
+        <div style="text-align: center; padding: 1.5rem 0;">
+          <svg viewBox="0 0 300 240" style="width: 100%; max-width: 320px;">
+            <!-- pentagon grid -->
+            <g stroke="rgba(255,255,255,0.08)" fill="none" stroke-width="1">
+              <polygon points="150,40 245,108 209,220 91,220 55,108" />
+              <polygon points="150,72 219,121 196,202 104,202 81,121" transform="scale(0.75) translate(50,30)" />
+              <polygon points="150,40 245,108 209,220 91,220 55,108" transform="scale(0.5) translate(150,60)" />
+              <line x1="150" y1="40" x2="150" y2="220" />
+              <line x1="55" y1="108" x2="245" y2="108" />
+              <line x1="91" y1="220" x2="209" y2="220" />
+            </g>
+            <!-- data polygon -->
+            <polygon points="150,50 240,112 200,210 95,210 60,118"
+                     fill="rgba(236, 72, 153, 0.18)"
+                     stroke="var(--pink)" stroke-width="2" />
+            <!-- labels -->
+            <text x="150" y="32" text-anchor="middle" fill="var(--text-dim)" font-family="IBM Plex Mono" font-size="10">Engineering</text>
+            <text x="252" y="108" text-anchor="start" fill="var(--text-dim)" font-family="IBM Plex Mono" font-size="10">Architecture</text>
+            <text x="218" y="232" text-anchor="middle" fill="var(--text-dim)" font-family="IBM Plex Mono" font-size="10">Leadership</text>
+            <text x="82" y="232" text-anchor="middle" fill="var(--text-dim)" font-family="IBM Plex Mono" font-size="10">Innovation</text>
+            <text x="48" y="108" text-anchor="end" fill="var(--text-dim)" font-family="IBM Plex Mono" font-size="10">Discovery</text>
+          </svg>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.5rem;">
+          <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--emerald); margin-bottom: 0.3rem;">✓ AUTHORITY</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--text);">Verified Director</div>
+          </div>
+          <div style="background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 0.85rem;">
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; color: var(--amber); margin-bottom: 0.3rem;">⚡ VELOCITY</div>
+            <div style="font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; color: var(--text);">Tier-1 Scaling</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TARGET ECOSYSTEMS -->
+<section>
+  <div class="container">
+    <div class="section-label">Target Ecosystems</div>
+    <h2>Where the <em>88 active repos</em> live.</h2>
+    <p class="section-intro">Real distribution across the polyglot platform stack. Counts pulled from active public repos on <a href="https://github.com/mizcausevic-dev" style="color: var(--cyan);">mizcausevic-dev</a>.</p>
+
+    <div class="ecosystem-grid">
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: #60A5FA;"></div>
+          <div>
+            <div class="eco-label">TYPESCRIPT</div>
+            <div class="eco-count">46</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Repos</div>
+      </div>
+
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: var(--violet);"></div>
+          <div>
+            <div class="eco-label">AI · GOVERNANCE</div>
+            <div class="eco-count">28</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Repos</div>
+      </div>
+
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: var(--pink);"></div>
+          <div>
+            <div class="eco-label">REACT · FRONTEND</div>
+            <div class="eco-count">28</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Repos</div>
+      </div>
+
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: var(--cyan);"></div>
+          <div>
+            <div class="eco-label">PYTHON</div>
+            <div class="eco-count">12</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Repos</div>
+      </div>
+
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: var(--emerald);"></div>
+          <div>
+            <div class="eco-label">NODE · OPENAPI</div>
+            <div class="eco-count">9</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Repos</div>
+      </div>
+
+      <div class="ecosystem-card">
+        <div class="meta-left">
+          <div class="eco-pill" style="background: #FB923C;"></div>
+          <div>
+            <div class="eco-label">RUST · GO · POLYGLOT</div>
+            <div class="eco-count">15+</div>
+          </div>
+        </div>
+        <div class="eco-suffix">Languages</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POLYGLOT PLATFORM STACK -->
+<section>
+  <div class="container">
+    <div class="section-label">Polyglot Platform Stack</div>
+    <h2>Production-shaped services in the <em>right language for the problem</em>.</h2>
+    <p class="section-intro">Real backend services across 15+ languages. The polyglot reveal: not Python or TypeScript bias — language picked by problem shape. Compiled when latency matters, JVM when ecosystem matters, dynamic when iteration speed matters.</p>
+
+    <table class="polyglot-table">
+      <thead><tr><th style="width: 110px;">Language</th><th style="width: 280px;">Repo</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><span class="lang-pill lang-go">Go</span></td><td><a href="https://github.com/mizcausevic-dev/edge-policy-enforcer">edge-policy-enforcer</a></td><td>Edge request governance, bot handling, redirect control</td></tr>
+        <tr><td><span class="lang-pill lang-go">Go</span></td><td><a href="https://github.com/mizcausevic-dev/latency-budget-enforcer">latency-budget-enforcer</a></td><td>Latency budget enforcement, dependency drag review</td></tr>
+        <tr><td><span class="lang-pill lang-rust">Rust</span></td><td><a href="https://github.com/mizcausevic-dev/crawl-anomaly-detector">crawl-anomaly-detector</a></td><td>Crawl log anomaly scoring, indexing risk review</td></tr>
+        <tr><td><span class="lang-pill lang-rust">Rust</span></td><td><a href="https://github.com/mizcausevic-dev/support-escalation-router">support-escalation-router</a></td><td>Support queue escalation, SLA pressure scoring</td></tr>
+        <tr><td><span class="lang-pill lang-java">Java</span></td><td><a href="https://github.com/mizcausevic-dev/compliance-event-ledger">compliance-event-ledger</a></td><td>Spring Boot immutable compliance event history</td></tr>
+        <tr><td><span class="lang-pill lang-cs">C#</span></td><td><a href="https://github.com/mizcausevic-dev/tenant-isolation-guard">tenant-isolation-guard</a></td><td>ASP.NET Core tenant-boundary policy evaluation</td></tr>
+        <tr><td><span class="lang-pill lang-kotlin">Kotlin</span></td><td><a href="https://github.com/mizcausevic-dev/release-readiness-gatekeeper">release-readiness-gatekeeper</a></td><td>Release gate evaluation, dependency readiness scoring</td></tr>
+        <tr><td><span class="lang-pill lang-kotlin">Kotlin</span></td><td><a href="https://github.com/mizcausevic-dev/reliability-policy-coordinator">reliability-policy-coordinator</a></td><td>Dependency drag review, error-budget policy</td></tr>
+        <tr><td><span class="lang-pill lang-scala">Scala</span></td><td><a href="https://github.com/mizcausevic-dev/policy-decision-simulator">policy-decision-simulator</a></td><td>Policy simulation for governance scenarios, launch gates</td></tr>
+        <tr><td><span class="lang-pill lang-elixir">Elixir</span></td><td><a href="https://github.com/mizcausevic-dev/incident-handoff-broker">incident-handoff-broker</a></td><td>Incident routing, SLA-aware handoff scoring</td></tr>
+        <tr><td><span class="lang-pill lang-ruby">Ruby</span></td><td><a href="https://github.com/mizcausevic-dev/message-retention-guardian">message-retention-guardian</a></td><td>Retention policy enforcement, legal hold protection</td></tr>
+        <tr><td><span class="lang-pill lang-php">PHP</span></td><td><a href="https://github.com/mizcausevic-dev/entitlement-request-portal-api">entitlement-request-portal-api</a></td><td>Entitlement requests, approval routing, access review</td></tr>
+        <tr><td><span class="lang-pill lang-dart">Dart</span></td><td><a href="https://github.com/mizcausevic-dev/mobile-briefing-companion">mobile-briefing-companion</a></td><td>Flutter mobile app for executive briefings, signal summaries</td></tr>
+        <tr><td><span class="lang-pill lang-tf">Terraform</span></td><td><a href="https://github.com/mizcausevic-dev/platform-foundation-blueprint">platform-foundation-blueprint</a></td><td>Multi-environment networking, IAM blueprint</td></tr>
+        <tr><td><span class="lang-pill lang-py">Python</span></td><td><a href="https://github.com/mizcausevic-dev/audit-graph-explorer">audit-graph-explorer</a></td><td>Neo4j + Cypher relationship-driven audit analysis</td></tr>
+        <tr><td><span class="lang-pill lang-py">Python</span></td><td><a href="https://github.com/mizcausevic-dev/secret-rotation-scheduler">secret-rotation-scheduler</a></td><td>Secret rotation windows, owner prompts, stale-secret detection</td></tr>
+        <tr><td><span class="lang-pill lang-py">Python</span></td><td><a href="https://github.com/mizcausevic-dev/warehouse-reconciliation-engine">warehouse-reconciliation-engine</a></td><td>Source-to-warehouse drift detection, finance-grade reconciliation</td></tr>
+        <tr><td><span class="lang-pill lang-py">Python</span></td><td><a href="https://github.com/mizcausevic-dev/data-quality-guardrail">data-quality-guardrail</a></td><td>Schema drift, freshness lag, null spike detection</td></tr>
+        <tr><td><span class="lang-pill lang-dbt">dbt</span></td><td><a href="https://github.com/mizcausevic-dev/dbt-search-observatory">dbt-search-observatory</a></td><td>Search console, crawl, index coverage, freshness modeling</td></tr>
+        <tr><td><span class="lang-pill lang-sql">SQL</span></td><td><a href="https://github.com/mizcausevic-dev/search-observability-warehouse">search-observability-warehouse</a></td><td>Crawl analytics, indexation, technical SEO observability</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PLATFORM RELIABILITY STACK -->
+<section>
+  <div class="container">
+    <div class="section-label">Platform Reliability Stack</div>
+    <h2>Defense-in-depth for the <em>agent era</em>.</h2>
+    <p class="section-intro">A four-piece set in Python. Each independent. All designed to compose. Identity at the edge → rate limits at the model → canary at deploy → registry as source of truth.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">SRE</div>
+        <h3><a href="https://github.com/mizcausevic-dev/rate-limit-shield" style="color: var(--text); text-decoration: none;">rate-limit-shield</a></h3>
+        <div class="stack-card-body">Token bucket + circuit breaker + jittered retry with HTTP 429 / Retry-After awareness.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">CISO</div>
+        <h3><a href="https://github.com/mizcausevic-dev/identity-mesh" style="color: var(--text); text-decoration: none;">identity-mesh</a></h3>
+        <div class="stack-card-body">SPIFFE-style JWT-SVID broker — short-lived tokens, audience binding, zero long-lived keys.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">PLATFORM / SRE</div>
+        <h3><a href="https://github.com/mizcausevic-dev/agent-canary" style="color: var(--text); text-decoration: none;">agent-canary</a></h3>
+        <div class="stack-card-body">Progressive rollout, shadow mode, sticky-percent routing, auto-rollback.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">PLATFORM / MLOPS</div>
+        <h3><a href="https://github.com/mizcausevic-dev/model-registry-pro" style="color: var(--text); text-decoration: none;">model-registry-pro</a></h3>
+        <div class="stack-card-body">Model lifecycle catalog with lineage, stage promotion, and approval gates.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JSON-LD ENTITY GRAPH -->
+<section>
+  <div class="container">
+    <div class="section-label">JSON-LD Architecture</div>
+    <h2>Built for <em>AI discovery</em>, not just human readers.</h2>
+    <p class="section-intro">Structured data primary, prose secondary. This page is machine-parseable for LLM crawlers (AEO), search engines (SEO), and knowledge graphs. Below: the same identity definition this page is encoded with.</p>
+
+    <div class="json-block"><span class="jk">"@context"</span><span class="jp">:</span> <span class="jv">"https://schema.org/"</span><span class="jp">,</span>
+<span class="jk">"@type"</span><span class="jp">:</span> <span class="jv">"Person"</span><span class="jp">,</span>
+<span class="jk">"name"</span><span class="jp">:</span> <span class="jv">"Miz Causevic"</span><span class="jp">,</span>
+<span class="jk">"jobTitle"</span><span class="jp">:</span> <span class="jv">"Director of Web Engineering"</span><span class="jp">,</span>
+<span class="jk">"memberOf"</span><span class="jp">:</span> <span class="jp">{</span>
+  <span class="jk">"@type"</span><span class="jp">:</span> <span class="jv">"Organization"</span><span class="jp">,</span>
+  <span class="jk">"name"</span><span class="jp">:</span> <span class="jv">"Kinetic Gain"</span>
+<span class="jp">},</span>
+<span class="jk">"skills"</span><span class="jp">:</span> <span class="jp">[</span>
+  <span class="jv">"Python"</span><span class="jp">,</span> <span class="jv">"TypeScript"</span><span class="jp">,</span> <span class="jv">"Go"</span><span class="jp">,</span> <span class="jv">"Rust"</span><span class="jp">,</span> <span class="jv">"Java"</span><span class="jp">,</span>
+  <span class="jv">"C#"</span><span class="jp">,</span> <span class="jv">"Kotlin"</span><span class="jp">,</span> <span class="jv">"Scala"</span><span class="jp">,</span> <span class="jv">"Elixir"</span><span class="jp">,</span>
+  <span class="jv">"Ruby"</span><span class="jp">,</span> <span class="jv">"PHP"</span><span class="jp">,</span> <span class="jv">"Dart"</span><span class="jp">,</span> <span class="jv">"SQL"</span><span class="jp">,</span> <span class="jv">"Terraform"</span><span class="jp">,</span>
+  <span class="jv">"Platform Engineering"</span><span class="jp">,</span> <span class="jv">"AI Governance"</span><span class="jp">,</span>
+  <span class="jv">"SRE Primitives"</span><span class="jp">,</span> <span class="jv">"SPIFFE Zero-Trust Identity"</span><span class="jp">,</span>
+  <span class="jv">"Governance-as-Code"</span>
+<span class="jp">],</span>
+<span class="jk">"knowsAbout"</span><span class="jp">:</span> <span class="jp">[</span>
+  <span class="jv">"AI Platform Engineering"</span><span class="jp">,</span> <span class="jv">"RAG Quality Monitoring"</span><span class="jp">,</span>
+  <span class="jv">"Agent Fleet Observability"</span><span class="jp">,</span> <span class="jv">"MCP Server Governance"</span><span class="jp">,</span>
+  <span class="jv">"LLM Router Architecture"</span><span class="jp">,</span> <span class="jv">"Token Cost Attribution"</span>
+<span class="jp">]</span></div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section>
+  <div class="container">
+    <div class="section-label">Toolkit</div>
+    <h2>The <em>full stack</em>.</h2>
+
+    <div class="stack-grid" style="margin-top: 1.5rem;">
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Languages</div>
+        <h3>Polyglot fluency</h3>
+        <div class="stack-card-body">Python · TypeScript · Go · Rust · Java · C# · Kotlin · Scala · Elixir · Ruby · PHP · Dart · SQL · HCL · dbt</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Backend</div>
+        <h3>Spec-first APIs</h3>
+        <div class="stack-card-body">FastAPI · Express · Spring Boot · ASP.NET Core · Javalin · Cowboy/Plug · WEBrick. OpenAPI everywhere. Pydantic validation. CI as a feature, not an afterthought.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Frontend</div>
+        <h3>Operator surfaces</h3>
+        <div class="stack-card-body">React 19 · Vue 3 · Flutter · TypeScript · Vite · Tailwind · Recharts · Motion. Type-safe data plumbing. Built for operators, not designers.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">Data</div>
+        <h3>PostgreSQL-grounded</h3>
+        <div class="stack-card-body">PostgreSQL · DuckDB · dbt · Neo4j · Pandas · Pydantic. Revenue modeling, attribution analysis, forecasting, cost intelligence.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">AI / Platform</div>
+        <h3>Governance-as-code</h3>
+        <div class="stack-card-body">SPIFFE zero-trust identity · LLM routing · token-cost attribution · OpenAPI specs · SOC 2 / EU AI Act / ISO 27001 / NIST policy mappings.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">CI / CD</div>
+        <h3>Push-to-deploy</h3>
+        <div class="stack-card-body">GitHub Actions · FTP auto-deploy · Hostinger · AGPL-3.0 licensing. Every dashboard repo is push-to-deploy. Zero manual upload.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section>
+  <div class="container">
+    <div class="cta">
+      <div class="section-label" style="margin-bottom: 1rem;">Working Interest</div>
+      <h2>Open to <em>Director / Principal-level</em> roles.</h2>
+      <p style="color: var(--text-dim); max-width: 640px; margin: 0 auto 1.75rem;">Platform Engineering · Web Engineering · AI Platform · Director of Web · Principal Architect. Enterprise B2B SaaS. East Coast time. Remote-friendly.</p>
+      <p>
+        <a href="mailto:miz@kineticgain.com">📧 miz@kineticgain.com</a>
+        <a class="ghost" href="https://github.com/mizcausevic-dev">⌥ github.com/mizcausevic-dev</a>
+      </p>
+    </div>
+
+    <p style="text-align: center; color: var(--text-faint); font-family: 'IBM Plex Serif', Georgia, serif; font-style: italic; font-size: 0.95rem; margin-top: 2rem;">
+      "Long-lived credentials are tomorrow's incident reports. Build short-lived. Audit always. Document once."
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p><a href="https://github.com/mizcausevic-dev?tab=repositories&type=public&sort=updated">All active repositories</a> · <a href="https://gv.kineticgain.com">gv.kineticgain.com</a> · <a href="https://mcp.kineticgain.com">mcp.kineticgain.com</a> · <a href="https://rag.kineticgain.com">rag.kineticgain.com</a> · <a href="https://observe.kineticgain.com">observe.kineticgain.com</a></p>
+  </div>
+</footer>
 
 </body>
 </html>
