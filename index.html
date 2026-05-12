@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miz Causevic â€” Director of Web Engineering Â· Platform Architecture</title>
+<title>Miz Causevic Ã¢â‚¬â€ Director of Web Engineering Ã‚Â· Platform Architecture</title>
 <meta name="description" content="Platform engineering for production AI: reliability, identity, governance, decision intelligence. Director-level B2B SaaS technologist with 30 years across IBM, CyberArk, Alteryx, Digital.ai, Gryphon.ai.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +79,7 @@
   }
 
   .masthead-meta span:not(:last-child)::after {
-    content: 'Â·';
+    content: 'Ã‚Â·';
     margin-left: 18px;
     color: var(--rule);
   }
@@ -542,7 +542,17 @@
   section:nth-of-type(4) { animation-delay: 220ms; }
   section:nth-of-type(5) { animation-delay: 260ms; }
   section:nth-of-type(6) { animation-delay: 300ms; }
-</style>
+    .live-products-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; }
+    .live-products-table th, .live-products-table td { text-align: left; padding: 0.85rem 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 0.95rem; }
+    .live-products-table th { color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.7rem; font-weight: 600; }
+    .live-products-table a.product-link { font-family: 'IBM Plex Mono', monospace; color: #66FCF1; text-decoration: none; font-weight: 600; }
+    .live-products-table a.product-link:hover { text-decoration: underline; }
+    .buyer-tag { display: inline-block; padding: 0.2rem 0.55rem; border-radius: 3px; font-size: 0.65rem; font-family: 'IBM Plex Mono', monospace; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+    .buyer-tag.eng { background: rgba(102, 252, 241, 0.12); color: #66FCF1; }
+    .buyer-tag.ciso { background: rgba(16, 185, 129, 0.15); color: #10B981; }
+    .buyer-tag.mlops { background: rgba(167, 139, 250, 0.15); color: #A78BFA; }
+    .buyer-tag.sre { background: rgba(59, 130, 246, 0.18); color: #60A5FA; }
+  </style>
 </head>
 
 <body>
@@ -560,8 +570,8 @@
       <h1 class="name">Miz <em>Causevic</em></h1>
       <div class="role">
         Director of Web Engineering
-        <span class="sep">Â·</span> Platform Architecture
-        <span class="sep">Â·</span> B2B SaaS Technologist
+        <span class="sep">Ã‚Â·</span> Platform Architecture
+        <span class="sep">Ã‚Â·</span> B2B SaaS Technologist
       </div>
     </div>
     <div class="header-stats">
@@ -669,7 +679,7 @@
       </tbody>
     </table>
 
-    <div class="stack-caption">All four repos: <strong>MIT-licensed</strong> Â· <strong>CI green on Python 3.10/3.11/3.12</strong> Â· <strong>architecture diagrams committed</strong> Â· <strong>doctrine-led READMEs</strong>.</div>
+    <div class="stack-caption">All four repos: <strong>MIT-licensed</strong> Ã‚Â· <strong>CI green on Python 3.10/3.11/3.12</strong> Ã‚Â· <strong>architecture diagrams committed</strong> Ã‚Â· <strong>doctrine-led READMEs</strong>.</div>
   </section>
 
   <!-- ============== WHAT I BUILD ============== -->
@@ -759,39 +769,69 @@
     <div class="pillars">
       <div class="pillar">
         <span class="pillar-num">Languages</span>
-        <h3>Python Â· TypeScript Â· SQL Â· Bash</h3>
+        <h3>Python Ã‚Â· TypeScript Ã‚Â· SQL Ã‚Â· Bash</h3>
         <p>Polyglot fluency. Python for reliability primitives and data planes. TypeScript for control planes, APIs, operator UIs. PostgreSQL for everything that needs to survive a deploy.</p>
       </div>
       <div class="pillar">
         <span class="pillar-num">Backend</span>
-        <h3>FastAPI Â· Express Â· Hatchling Â· GitHub Actions</h3>
+        <h3>FastAPI Ã‚Â· Express Ã‚Â· Hatchling Ã‚Â· GitHub Actions</h3>
         <p>Spec-first OpenAPI, Pydantic validation, packaging-aware deploys. CI as a feature, not an afterthought.</p>
       </div>
       <div class="pillar">
         <span class="pillar-num">Frontend</span>
-        <h3>React Â· TypeScript Â· Vite Â· Tailwind Â· Recharts</h3>
+        <h3>React Ã‚Â· TypeScript Ã‚Â· Vite Ã‚Â· Tailwind Ã‚Â· Recharts</h3>
         <p>Fast iteration loops, component-driven design systems, type-safe data plumbing. Built for operators, not designers.</p>
       </div>
       <div class="pillar">
         <span class="pillar-num">Reliability</span>
-        <h3>SRE primitives Â· Zero-trust identity Â· Governance-as-code</h3>
+        <h3>SRE primitives Ã‚Â· Zero-trust identity Ã‚Â· Governance-as-code</h3>
         <p>Buckets, breakers, retries, canaries, SPIFFE, policy engines, compliance mappings. The boring stuff that keeps things up at 3 AM.</p>
       </div>
     </div>
   </section>
 
 
-  <!-- ============== LIVE PRODUCT ============== -->
+    <!-- ============== LIVE PRODUCTS ============== -->
   <section>
     <div class="section-label">Currently Live</div>
-    <h2>GitVisualizer &mdash; <em>profile intelligence</em> for engineers.</h2>
-    <p class="section-intro">Premium GitHub profile dashboard. Type any username, see their portfolio in 30 seconds. Built React + TypeScript, AGPL-3.0, deployed on Hostinger.</p>
-    <div class="cta-links">
-      <a href="https://gv.kineticgain.com/" class="cta-link primary">gv.kineticgain.com</a>
-      <a href="https://github.com/mizcausevic-dev/gitvisualizer" class="cta-link">View source</a>
-    </div>
+    <h2>Four <em>live products</em> showcasing the platform thesis.</h2>
+    <p class="section-intro">Productized open-source dashboards for AI infrastructure governance, agent fleet observability, and developer portfolio intelligence. Each one a different buyer, each one a working URL. All push-to-deploy via GitHub Actions FTP CI/CD.</p>
+
+    <table class="live-products-table">
+      <thead>
+        <tr>
+          <th style="width: 240px;">Product</th>
+          <th>What it does</th>
+          <th style="width: 130px;">Buyer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a class="product-link" href="https://gv.kineticgain.com">gv.kineticgain.com</a></td>
+          <td>GitVisualizer &mdash; type any GitHub username, get a recruiter-grade visual portfolio in 30 seconds.</td>
+          <td><span class="buyer-tag eng">ENGINEERING</span></td>
+        </tr>
+        <tr>
+          <td><a class="product-link" href="https://mcp.kineticgain.com">mcp.kineticgain.com</a></td>
+          <td>MCP Sentinel &mdash; governance dashboard for Model Context Protocol servers. Tool surface audits, schema drift, posture scoring.</td>
+          <td><span class="buyer-tag ciso">CISO</span></td>
+        </tr>
+        <tr>
+          <td><a class="product-link" href="https://rag.kineticgain.com">rag.kineticgain.com</a></td>
+          <td>RAG Sentinel &mdash; hallucination detection, source freshness, citation quality, drift monitoring for enterprise RAG systems.</td>
+          <td><span class="buyer-tag mlops">ML / AI OPS</span></td>
+        </tr>
+        <tr>
+          <td><a class="product-link" href="https://observe.kineticgain.com">observe.kineticgain.com</a></td>
+          <td>AgentObserve &mdash; operator console for AI agent fleets. Runs, traces, cost budgets, SLA scoring, regression detection.</td>
+          <td><span class="buyer-tag sre">SRE</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="section-intro" style="margin-top: 1rem; opacity: 0.7; font-size: 0.85rem;">All four: <strong>React 19 + TypeScript</strong> &middot; <strong>AGPL-3.0</strong> &middot; <strong>CI green</strong> &middot; <strong>open source</strong> &middot; deployed on kineticgain.com subdomains.</p>
   </section>
-  <!-- ============== CTA ============== -->
+<!-- ============== CTA ============== -->
   <section class="cta">
     <div class="section-label">Working interest</div>
     <div class="cta-headline">Open to <em>Director / Principal-level</em> Platform Engineering, Web Engineering, or AI Platform roles.</div>
