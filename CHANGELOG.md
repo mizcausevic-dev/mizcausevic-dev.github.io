@@ -18,7 +18,7 @@ All notable changes to this project are documented here.
 
 ### Shipped
 - Cut the first coherent internal version of **mizcausevic-dev.github.io** with stable domain objects, review surfaces, and decision outputs.
-- Established the first reviewable version of the architecture described as: Career one-pager. Director of Web Engineering, Platform Architecture, B2B SaaS Technologist.
+- Established the first reviewable version of the architecture described as: Career one-pager. Boston Enterprise Technologist, Platform Architecture, B2B SaaS Technologist.
 - Focused the repo around actionability instead of passive reporting.
 
 ## [Prototype] - 2025-08-18

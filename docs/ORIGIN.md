@@ -15,6 +15,6 @@ That shaped the design philosophy:
 - **review-friendly** so the repo supports discussion, governance, and iteration instead of hiding the reasoning
 - **CI-native** so checks and narratives can live close to the build and change process
 
-This repo also avoids trying to be a vague platform for everything. Its value comes from being opinionated about a real problem: Career one-pager. Director of Web Engineering, Platform Architecture, B2B SaaS Technologist.
+This repo also avoids trying to be a vague platform for everything. Its value comes from being opinionated about a real problem: Career one-pager. Boston Enterprise Technologist, Platform Architecture, B2B SaaS Technologist.
 
 What comes next is practical. The roadmap is about closed-loop outcome reporting, stronger throughput analytics, and deeper handoff evidence. That is the discipline this repo is trying to model in a practical, reviewable way.
