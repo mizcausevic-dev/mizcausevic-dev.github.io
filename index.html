@@ -596,9 +596,9 @@
 <!-- CLOUD IDENTITY & PLATFORM GOVERNANCE LANE -->
 <section>
   <div class="container">
-    <div class="section-label">Cloud Identity, Platform &amp; FinOps Governance</div>
-    <h2>Seven <em>v1.0-prod operator consoles</em> across the multi-cloud admin stack.</h2>
-    <p class="section-intro">Microsoft (Entra access reviews, Intune device compliance, M365 Purview retention), AWS (IAM Access Analyzer), GCP (IAM policy drift + billing-anomaly routing), and Azure (landing-zone drift). Each is a synthetic-data operator console at production hardness — AGPL-3.0-or-later, dual-Node CI, dependabot, 95%+ statement coverage, deployed on its own kineticgain.com subdomain.</p>
+    <div class="section-label">Cloud Identity, Platform, FinOps &amp; Threat Detection</div>
+    <h2>Eight <em>v1.0-prod operator consoles</em> across the multi-cloud admin stack.</h2>
+    <p class="section-intro">Microsoft (Entra access reviews, Intune device compliance, M365 Purview retention), AWS (IAM Access Analyzer + GuardDuty triage), GCP (IAM policy drift + billing-anomaly routing), and Azure (landing-zone drift). Each is a synthetic-data operator console at production hardness — AGPL-3.0-or-later, dual-Node CI, dependabot, 95%+ statement coverage, deployed on its own kineticgain.com subdomain.</p>
 
     <table class="live-products-table">
       <thead>
@@ -630,6 +630,11 @@
           <td><span class="buyer-tag ciso">CLOUD IAM</span></td>
         </tr>
         <tr>
+          <td><a class="product-link" href="https://guardduty.kineticgain.com">guardduty.kineticgain.com</a></td>
+          <td>AWS GuardDuty Triage Board — detector posture, threat-finding triage, credential exfiltration / crypto-mining / anomalous-API behavior, response sequencing.</td>
+          <td><span class="buyer-tag ciso">THREAT DET</span></td>
+        </tr>
+        <tr>
           <td><a class="product-link" href="https://gcp.kineticgain.com">gcp.kineticgain.com</a></td>
           <td>GCP IAM Policy Diff Lab — IAM snapshot drift, public <code>allUsers</code> bindings, <code>roles/editor</code> creep, service-account token-creator grants, org-policy guardrail mismatch.</td>
           <td><span class="buyer-tag ciso">CLOUD IAM</span></td>
@@ -647,7 +652,7 @@
       </tbody>
     </table>
 
-    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">These seven surfaces:</strong> direct recruiter answer to <em>"Azure / Microsoft 365 / Entra / Intune, AWS / GCP"</em> plus a GCP FinOps surface — synthetic data, no live cloud credentials, production-grade gate stack, all open source.</p>
+    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">These eight surfaces:</strong> direct recruiter answer to <em>"Azure / Microsoft 365 / Entra / Intune, AWS / GCP"</em> plus FinOps and threat-detection extensions — synthetic data, no live cloud credentials, production-grade gate stack, all open source.</p>
   </div>
 </section>
 
