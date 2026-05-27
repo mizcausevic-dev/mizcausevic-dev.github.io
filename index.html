@@ -596,9 +596,9 @@
 <!-- CLOUD IDENTITY & PLATFORM GOVERNANCE LANE -->
 <section>
   <div class="container">
-    <div class="section-label">Cloud Identity &amp; Platform Governance</div>
-    <h2>Six <em>v1.0-prod operator consoles</em> across the multi-cloud admin stack.</h2>
-    <p class="section-intro">Microsoft (Entra access reviews, Intune device compliance, M365 Purview retention), AWS (IAM Access Analyzer), GCP (IAM policy drift), and Azure (landing-zone drift). Each is a synthetic-data operator console at production hardness — AGPL-3.0-or-later, dual-Node CI, dependabot, 95%+ statement coverage, deployed on its own kineticgain.com subdomain.</p>
+    <div class="section-label">Cloud Identity, Platform &amp; FinOps Governance</div>
+    <h2>Seven <em>v1.0-prod operator consoles</em> across the multi-cloud admin stack.</h2>
+    <p class="section-intro">Microsoft (Entra access reviews, Intune device compliance, M365 Purview retention), AWS (IAM Access Analyzer), GCP (IAM policy drift + billing-anomaly routing), and Azure (landing-zone drift). Each is a synthetic-data operator console at production hardness — AGPL-3.0-or-later, dual-Node CI, dependabot, 95%+ statement coverage, deployed on its own kineticgain.com subdomain.</p>
 
     <table class="live-products-table">
       <thead>
@@ -639,10 +639,15 @@
           <td>Azure Landing-Zone Drift Radar — landing-zone baseline drift, owner-role drift, missing deny assignments, disabled Defender, diagnostics gaps, route-bypass posture.</td>
           <td><span class="buyer-tag ciso">PLATFORM</span></td>
         </tr>
+        <tr>
+          <td><a class="product-link" href="https://billing.kineticgain.com">billing.kineticgain.com</a></td>
+          <td>GCP Billing Anomaly Router — billing-anomaly routing, budget-breach detection, spend-spike escalation, idle commitments, unlabeled-cost drift, billing-export gaps.</td>
+          <td><span class="buyer-tag ciso">FINOPS</span></td>
+        </tr>
       </tbody>
     </table>
 
-    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">These six surfaces:</strong> direct recruiter answer to <em>"Azure / Microsoft 365 / Entra / Intune, AWS / GCP"</em> — synthetic data, no live cloud credentials, production-grade gate stack, all open source.</p>
+    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">These seven surfaces:</strong> direct recruiter answer to <em>"Azure / Microsoft 365 / Entra / Intune, AWS / GCP"</em> plus a GCP FinOps surface — synthetic data, no live cloud credentials, production-grade gate stack, all open source.</p>
   </div>
 </section>
 
