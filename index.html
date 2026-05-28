@@ -661,6 +661,40 @@
   </div>
 </section>
 
+<!-- DECISION CARD → VAULT CONTRACT FAMILY -->
+<section>
+  <div class="container">
+    <div class="section-label">Buyer-Published Contract → Multiple Enforcement Points</div>
+    <h2>One <em>AI Procurement Decision Card</em> drives four enforcement surfaces.</h2>
+    <p class="section-intro">Decision Card v0.2 adds <code>data_vault_targets[]</code> — a Skyyflow-shaped field-level vault contract declaring which PII fields may be tokenized and which roles may detokenize. Four sibling repos implement the same <code>SkyyflowVault</code> interface across server-side, client-side, pipeline-side, and CLI. One buyer document, four enforcement axes.</p>
+
+    <div class="stack-grid">
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">SERVER-SIDE</div>
+        <h3><a href="https://github.com/mizcausevic-dev/rag-sentinel" style="color: var(--text); text-decoration: none;">rag-sentinel</a></h3>
+        <div class="stack-card-body">Tokenize-before-index for RAG. PII is replaced with <code>skyy_&lt;hex16&gt;</code> tokens before content reaches the vector store. Detokenize gated by caller-role authorization on the rag-sentinel side, before the vault ever sees the request.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">CLIENT-SIDE</div>
+        <h3><a href="https://github.com/mizcausevic-dev/deal-desk-workspace" style="color: var(--text); text-decoration: none;">deal-desk-workspace</a></h3>
+        <div class="stack-card-body">RBAC-aware reveal for the deal desk surface. Sales Reps see masked tokens; Deal Desk Leads and Finance Directors may click-to-reveal. Every attempt — successful or denied — appears in a session audit panel.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">PIPELINE-SIDE</div>
+        <h3><a href="https://github.com/mizcausevic-dev/kg-skyyflow-klaviyo-bridge" style="color: var(--text); text-decoration: none;">kg-skyyflow-klaviyo-bridge</a></h3>
+        <div class="stack-card-body">Node lib + CLI · <code>audit</code> · <code>tokenize</code> · <code>detokenize</code> · <code>transform</code> (webhook → Klaviyo). Per-field protection levels: <code>none</code> / <code>masked</code> / <code>tokenized</code>. v0.2.0, AGPL-3.0, 40 vitest tests, 95% coverage.</div>
+      </div>
+      <div class="stack-card">
+        <div class="stack-card-eyebrow">VISUAL</div>
+        <h3><a href="https://github.com/mizcausevic-dev/skyyflow-klaviyo-bridge-console" style="color: var(--text); text-decoration: none;">skyyflow-klaviyo-bridge-console</a></h3>
+        <div class="stack-card-body">React + Vite operator console — dashboard with recharts, live webhook simulator with a 3-stage animated pipeline (ingress → vault → klaviyo), field mapper, sync log stream. Runs the real engine in-browser via Web Crypto.</div>
+      </div>
+    </div>
+
+    <p style="margin-top: 1rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">Architecture answer:</strong> when a buyer publishes one governance contract, the rest of the system reads it. Four surfaces, one contract, one <code>SkyyflowVault</code> interface — written once, enforced at every seam where PII actually moves.</p>
+  </div>
+</section>
+
 <!-- CAPABILITY MATRIX -->
 <section>
   <div class="container">
@@ -758,7 +792,7 @@
   <div class="container">
     <div class="section-label">Target Ecosystems</div>
     <h2>Where the <em>current portfolio clusters</em> live.</h2>
-    <p class="section-intro">The current public build wave now spans revenue systems, traffic integrity, digital intelligence, resilient web platform delivery, regulated workflow operations, operator command surfaces, a polyglot language atlas, and multi-cloud admin control planes. Recent anchors include <code>revops-lead-router</code>, <code>fraud-click-filter</code>, <code>dbt-multi-touch-attr</code>, <code>headless-wp-vue-starter</code>, <code>regulatory-comment-intelligence-hub</code>, <code>contract-clause-obligation-graph</code>, <code>prior-authorization-evidence-router</code>, <code>patient-consent-audit-stream</code>, <code>creator-partnership-deal-desk</code>, <code>booking-disruption-command-center</code>, <code>menu-availability-sync-engine</code>, <code>store-ops-incident-board</code>, <code>flutter-operator-console</code>, <code>capacity-optimizer-jl</code>, <code>regulatory-reporting-mart</code>, and the Azure / Microsoft 365 / AWS / GCP operator stack. Public repo count is now 342.</p>
+    <p class="section-intro">The current public build wave now spans revenue systems, traffic integrity, digital intelligence, resilient web platform delivery, regulated workflow operations, operator command surfaces, a polyglot language atlas, and multi-cloud admin control planes. Recent anchors include <code>revops-lead-router</code>, <code>fraud-click-filter</code>, <code>dbt-multi-touch-attr</code>, <code>headless-wp-vue-starter</code>, <code>regulatory-comment-intelligence-hub</code>, <code>contract-clause-obligation-graph</code>, <code>prior-authorization-evidence-router</code>, <code>patient-consent-audit-stream</code>, <code>creator-partnership-deal-desk</code>, <code>booking-disruption-command-center</code>, <code>menu-availability-sync-engine</code>, <code>store-ops-incident-board</code>, <code>flutter-operator-console</code>, <code>capacity-optimizer-jl</code>, <code>regulatory-reporting-mart</code>, and the Azure / Microsoft 365 / AWS / GCP operator stack. Public repo count is now 372.</p>
 
     <div class="ecosystem-grid">
       <div class="ecosystem-card">
@@ -821,7 +855,7 @@
           <div class="eco-pill" style="background: #FB923C;"></div>
           <div>
             <div class="eco-label">PUBLIC PORTFOLIO</div>
-            <div class="eco-count">342</div>
+            <div class="eco-count">372</div>
           </div>
         </div>
         <div class="eco-suffix">Repos</div>
