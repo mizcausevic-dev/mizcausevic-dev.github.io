@@ -666,7 +666,7 @@
   <div class="container">
     <div class="section-label">Buyer-Published Contract → Multiple Enforcement Points</div>
     <h2>One <em>AI Procurement Decision Card</em> drives four enforcement surfaces.</h2>
-    <p class="section-intro">Decision Card v0.2 adds <code>data_vault_targets[]</code> — a Skyyflow-shaped field-level vault contract declaring which PII fields may be tokenized and which roles may detokenize. Four sibling repos implement the same <code>SkyyflowVault</code> interface across server-side, client-side, pipeline-side, and CLI. One buyer document, four enforcement axes.</p>
+    <p class="section-intro">Decision Card v0.2 adds <code>data_vault_targets[]</code> — a Skyyflow-shaped field-level vault contract declaring which PII fields may be tokenized and which roles may detokenize. <strong>Decision Card v0.3</strong> adds <code>retention_envelope[]</code> — per-field TTL + redaction action + ed25519-signed deletion-proof endpoint, the pair to vault targets: who can read AND how long the data lives. Four sibling repos implement the same <code>SkyyflowVault</code> interface across server-side, client-side, pipeline-side, and CLI. One buyer document, four enforcement axes.</p>
 
     <div class="stack-grid">
       <div class="stack-card">
