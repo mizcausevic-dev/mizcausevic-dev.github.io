@@ -709,6 +709,61 @@
   </div>
 </section>
 
+<!-- SQUAD TRIAGE 2026-05-31 — THREE NEW LANES -->
+<section>
+  <div class="container">
+    <div class="section-label">Squad triage 2026-05-31 · 115-repo backlog drained in one session</div>
+    <h2>Three new lanes shipped from a <em>single triage workflow</em>.</h2>
+    <p class="section-intro">A 115-repo Codex backlog was triaged, classified, and 92% drained in one continuous shipping session — 10 exec-family duplicates archived publicly with supersession notes (each pointing at the apex executive-tools layer that superseded them), 56 v1.0-prod hardenings, 32 semver releases on the npm bucket. Three coherent product lanes emerged from the surviving repos. All maintain the standing readiness/posture/scaffolding language guardrail.</p>
+
+    <h3 style="margin-top: 2rem; color: var(--text); font-size: 1.25rem;">Lane 1 — Operator Diagnostics (4 live, 4 CI-pending)</h3>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">Narrowly-scoped operator data tools, distinct from <code>/trust/</code> governance scaffolding and <code>/calculators/</code> rubric math.</p>
+    <table class="live-products-table">
+      <thead><tr><th style="width: 240px;">Surface</th><th>What it does</th><th style="width: 130px;">Buyer</th></tr></thead>
+      <tbody>
+        <tr><td><a class="product-link" href="https://reality.kineticgain.com/">reality.kineticgain.com</a></td><td>Claims-vs-Reality Engine — vendor-claim / proof-gap scoring + board-ready diligence output.</td><td><span class="buyer-tag ciso">CFO/BOARD</span></td></tr>
+        <tr><td><a class="product-link" href="https://revenue.kineticgain.com/">revenue.kineticgain.com</a></td><td>Revenue Infrastructure Scorecard — pipeline integrity, attribution health, conversion-stack maturity scoring.</td><td><span class="buyer-tag ciso">CRO/GROWTH</span></td></tr>
+        <tr><td><a class="product-link" href="https://replace.kineticgain.com/">replace.kineticgain.com</a></td><td>Vendor Replacement Intelligence — switching-cost surfacing; narrower than the rubric Vendor Renewal calculator.</td><td><span class="buyer-tag ciso">CFO/PROCURE</span></td></tr>
+        <tr><td><a class="product-link" href="https://members.kineticgain.com/">members.kineticgain.com</a></td><td>WordPress Member Journey Consent Kit — lifecycle consent evidence across login / profile / upgrade / cancel.</td><td><span class="buyer-tag ciso">GROWTH OPS</span></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top: 0.5rem; color: var(--text-faint); font-size: 0.85rem;">Pending Codex CI fixes (lockfile/peer-dep issues filed): identity, martech, experiments, margin.</p>
+
+    <h3 style="margin-top: 2rem; color: var(--text); font-size: 1.25rem;">Lane 2 — HealthTech operator surfaces (8 clinical + GxP-territory, all v1.0-prod)</h3>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">Eight surfaces shipped after an aggressive readiness/posture language audit (all came back clean — Codex's v2-era scaffold already maintains "no claim of HIPAA / GMP / GxP / FDA compliance" disclaimers by default). Synthetic data only.</p>
+    <table class="live-products-table">
+      <thead><tr><th style="width: 240px;">Surface</th><th>What it does</th><th style="width: 130px;">Buyer</th></tr></thead>
+      <tbody>
+        <tr><td><a class="product-link" href="https://gxp.kineticgain.com/">gxp.kineticgain.com</a></td><td>GxP Change Control Board — change classification, validation evidence, SOP acknowledgments, cutover readiness.</td><td><span class="buyer-tag ciso">QA/GxP</span></td></tr>
+        <tr><td><a class="product-link" href="https://assay.kineticgain.com/">assay.kineticgain.com</a></td><td>Assay Release Readiness Board — release-blocker visibility for diagnostics assay reviews.</td><td><span class="buyer-tag ciso">DIAGNOSTICS</span></td></tr>
+        <tr><td><a class="product-link" href="https://capa.kineticgain.com/">capa.kineticgain.com</a></td><td>Batch Deviation CAPA Ledger — deviation classification, CAPA assignment, root-cause continuity.</td><td><span class="buyer-tag ciso">BIOTECH QA</span></td></tr>
+        <tr><td><a class="product-link" href="https://narrative.kineticgain.com/">narrative.kineticgain.com</a></td><td>Clinical Event Narrative Review Board — case-narrative classification, reviewer routing, escalation posture.</td><td><span class="buyer-tag ciso">CLINICAL</span></td></tr>
+        <tr><td><a class="product-link" href="https://diagnostics.kineticgain.com/">diagnostics.kineticgain.com</a></td><td>Diagnostic QC Evidence Router — QC evidence classification, control-breach routing, audit-safe continuity.</td><td><span class="buyer-tag ciso">LAB QA</span></td></tr>
+        <tr><td><a class="product-link" href="https://instruments.kineticgain.com/">instruments.kineticgain.com</a></td><td>Lab Instrument Change Audit — qualification status, audit-trail continuity, release-blocker visibility.</td><td><span class="buyer-tag ciso">LAB OPS</span></td></tr>
+        <tr><td><a class="product-link" href="https://safety.kineticgain.com/">safety.kineticgain.com</a></td><td>Pharmacovigilance Signal Router — signal classification, MedDRA-aligned routing, regulator-window visibility.</td><td><span class="buyer-tag ciso">PHARMA PV</span></td></tr>
+        <tr><td><a class="product-link" href="https://specimen.kineticgain.com/">specimen.kineticgain.com</a></td><td>Specimen Chain Of Custody Console — custody-lane visibility, transfer gaps, cold-chain posture.</td><td><span class="buyer-tag ciso">LAB LOGISTICS</span></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin-top: 2rem; color: var(--text); font-size: 1.25rem;">Lane 3 — Polyglot proof expansion (Julia · R · Python, 7 new surfaces)</h3>
+    <p style="color: var(--text-dim); margin-bottom: 1rem;">Real operator surfaces in non-TypeScript runtimes. Extends the existing Flutter / Julia / Python / Rust / Kotlin / PHP polyglot stack. Each shipped at the same production hardness as the TypeScript baseline.</p>
+    <table class="live-products-table">
+      <thead><tr><th style="width: 240px;">Surface</th><th>What it does</th><th style="width: 130px;">Language</th></tr></thead>
+      <tbody>
+        <tr><td><a class="product-link" href="https://appeals.kineticgain.com/">appeals.kineticgain.com</a></td><td>Campaign Appeal Fatigue Monitor — track when growth / donor appeal frequency crosses LTV or unsubscribe-risk thresholds.</td><td><span class="buyer-tag ciso">JULIA</span></td></tr>
+        <tr><td><a class="product-link" href="https://treasury.kineticgain.com/">treasury.kineticgain.com</a></td><td>Treasury Liquidity Signal Lab — cash-position signals, liquidity-stress scenarios, runway visibility.</td><td><span class="buyer-tag ciso">JULIA</span></td></tr>
+        <tr><td><a class="product-link" href="https://yield.kineticgain.com/">yield.kineticgain.com</a></td><td>Yield Forecast Studio — forecast-divergence detection, scenario stacks, planner-safe reconciliation.</td><td><span class="buyer-tag ciso">JULIA</span></td></tr>
+        <tr><td><a class="product-link" href="https://care.kineticgain.com/">care.kineticgain.com</a></td><td>Care Variation Analysis Notebook — practitioner-level variation detection, outcome continuity, cohort-safe reporting.</td><td><span class="buyer-tag ciso">R</span></td></tr>
+        <tr><td><a class="product-link" href="https://loss.kineticgain.com/">loss.kineticgain.com</a></td><td>Claims Loss Trend Lab — loss-trend reconciliation, frequency/severity decomposition, reserve-safe reporting.</td><td><span class="buyer-tag ciso">R</span></td></tr>
+        <tr><td><a class="product-link" href="https://donors.kineticgain.com/">donors.kineticgain.com</a></td><td>Donor Cohort Risk Lab — donor-cohort retention risk, lapsed-prevention modeling, segment-safe targeting.</td><td><span class="buyer-tag ciso">R</span></td></tr>
+        <tr><td><a class="product-link" href="https://outcomes.kineticgain.com/">outcomes.kineticgain.com</a></td><td>Program Outcome Proof Ledger — outcome-evidence continuity, grant-reporting posture, cohort-safe attestation chain.</td><td><span class="buyer-tag ciso">PYTHON</span></td></tr>
+      </tbody>
+    </table>
+
+    <p style="margin-top: 1.5rem; color: var(--text-faint); font-size: 0.85rem;"><strong style="color: var(--text-dim);">+21 GitHub Actions semver-released same session</strong> — all protocol PR-gate Actions now have <code>v0.1.0</code> + floating <code>v0.1</code> tags for Marketplace publish. Plus <strong>22 vertical 6-pack components</strong> hardened (LegalTech + EnergyTech + DefenseTech) and <strong>15 standard operator surfaces</strong> across Microsoft ecosystem, FinTech, vertical operator. <strong>Triage workflow output:</strong> 10 archived (with public supersession notes) + 56 v1.0-prod + 32 semver + 6 Codex-lane CI issues filed = 92% backlog drain.</p>
+  </div>
+</section>
+
 <!-- DECISION CARD → VAULT CONTRACT FAMILY -->
 <section>
   <div class="container">
