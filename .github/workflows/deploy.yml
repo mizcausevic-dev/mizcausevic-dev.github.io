@@ -1,0 +1,147 @@
+name: Deploy career site to Pages (canonical-spliced)
+
+# Triggers:
+#   - push to main           → splice canonical + deploy
+#   - daily schedule         → re-fetch apex canonical so career stats follow drift
+#                              even without a code push to this repo
+#   - manual dispatch        → on-demand re-splice
+#
+# This workflow REPLACES the legacy "Pages: deploy from branch" build.
+# Pages source must be set to "GitHub Actions" (build_type=workflow) in repo settings.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 6 * * *'  # 06:17 UTC daily — picks up apex canonical drift
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout career site
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
+
+      - name: Fetch + run apex canonical generator
+        run: |
+          set -euo pipefail
+          git clone --depth=1 https://github.com/mizcausevic-dev/kineticgain-com-apex.git /tmp/apex
+          cd /tmp/apex
+          python3 generate.py
+          echo "OK: apex canonical generated"
+          ls -la generated/v1-prod-count.html generated/security-stats-inline.md generated/archived-count.html generated/pulse-universe-count.html
+
+      - name: Splice canonical stats into index.html
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import pathlib, re
+
+          APEX = pathlib.Path("/tmp/apex/generated")
+
+          def load(name: str) -> str:
+              return (APEX / name).read_text(encoding="utf-8").strip()
+
+          def strip_html_comment_header(s: str) -> str:
+              # Drop the leading "<!-- GENERATED from canonical.json — do not hand-edit -->" line
+              # so the spliced inline content stays compact on a single line.
+              lines = s.splitlines()
+              if lines and lines[0].lstrip().startswith("<!--") and "GENERATED" in lines[0]:
+                  lines = lines[1:]
+              return "\n".join(lines).strip()
+
+          def md_inline_to_html(md: str) -> str:
+              # Conservative inline transform sufficient for security-stats-inline.md:
+              #   **X** → <strong>X</strong>
+              #   `X`   → <code>X</code>
+              # No block-level transforms (no headings, no lists).
+              md = strip_html_comment_header(md)
+              md = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", md)
+              md = re.sub(r"`([^`]+?)`", r"<code>\1</code>", md)
+              return md.strip()
+
+          # Splice payloads — each marker pair wraps EXACTLY the drift-prone token(s)
+          # so the surrounding prose remains hand-edited. Single-line inline splices
+          # (no trailing newlines) because the target paragraph is one HTML line.
+          SPLICES = [
+              # (begin marker prefix, end marker, payload string)
+              ("<!-- BEGIN GENERATED v1-prod-count",
+               "<!-- END GENERATED v1-prod-count -->",
+               strip_html_comment_header(load("v1-prod-count.html"))),
+
+              ("<!-- BEGIN GENERATED archived-count",
+               "<!-- END GENERATED archived-count -->",
+               strip_html_comment_header(load("archived-count.html"))),
+
+              ("<!-- BEGIN GENERATED pulse-universe-count",
+               "<!-- END GENERATED pulse-universe-count -->",
+               strip_html_comment_header(load("pulse-universe-count.html"))),
+
+              ("<!-- BEGIN GENERATED security-stats-inline",
+               "<!-- END GENERATED security-stats-inline -->",
+               md_inline_to_html(load("security-stats-inline.md"))),
+          ]
+
+          target = pathlib.Path("index.html")
+          src = target.read_text(encoding="utf-8")
+
+          for begin_prefix, end_marker, payload in SPLICES:
+              i = src.find(begin_prefix)
+              j = src.find(end_marker, i)
+              if i < 0 or j < 0:
+                  raise SystemExit(f"FAIL: markers missing — begin='{begin_prefix}' i={i} end='{end_marker}' j={j}")
+              i_end_of_begin = src.find("-->", i) + len("-->")
+              # Inline single-line splice — no \n, no end-indent — paragraph stays one line.
+              src = src[:i_end_of_begin] + payload + src[j:]
+              print(f"OK: spliced {len(payload)} bytes for '{begin_prefix}'")
+
+          target.write_text(src, encoding="utf-8", newline="\n")
+          print(f"OK: wrote {target} ({len(src)} bytes total)")
+          PY
+
+      - name: Fingerprint check (fail-fast if splice silently dropped)
+        run: |
+          set -euo pipefail
+          for cls in kg-v1prod-num kg-archived-num kg-pulse-universe; do
+            if ! grep -q "class=\"$cls\"" index.html; then
+              echo "FAIL: expected class '$cls' not present after splice"
+              exit 1
+            fi
+            echo "OK: '$cls' present in index.html"
+          done
+          # security-stats-inline has no class wrapper — check for the canonical "Dependabot on" phrase.
+          if ! grep -q "Dependabot on <strong>" index.html; then
+            echo "FAIL: security-stats-inline splice did not produce '<strong>' HTML"
+            exit 1
+          fi
+          echo "OK: security-stats-inline HTML present"
+
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
