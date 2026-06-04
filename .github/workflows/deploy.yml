@@ -65,18 +65,29 @@ jobs:
           import json, pathlib
 
           canon = json.load(open("/tmp/apex-canon/kinetic-gain-canonical.json", encoding="utf-8"))
-          measured = canon.get("measured", "")
 
-          # Numbers under canonical.* — same source-of-truth keys that apex generate.py
-          # emits into generated/*.html. We rebuild the equivalent inline HTML here.
-          v1_prod = canon["v1_prod_count"]
-          archived = canon["archived_count"]
-          pulse_size = canon["pulse_stats"]["universe_size"]
-          sec = canon["security_stats"]
-          deps  = sec["dependabot_repos"]
-          ql    = sec["codeql_repos"]
-          sc    = sec["scorecard_repos"]
-          sha   = sec["sha_pinned_uses_lines"]
+          # Canonical structure (mizcausevic-dev/kineticgain-com-apex/kinetic-gain-canonical.json):
+          #   headline_stats.{v1_prod_count, archived_count, _v1prod_measured, _archived_measured}
+          #   security_stats.{dependabot_repos, codeql_repos, scorecard_repos,
+          #                   sha_pinned_uses_lines, measured}
+          #   pulse_stats.{universe_size, measured}
+          headline = canon["headline_stats"]
+          sec      = canon["security_stats"]
+          pulse    = canon["pulse_stats"]
+
+          v1_prod          = headline["v1_prod_count"]
+          v1_prod_measured = headline.get("_v1prod_measured", canon.get("updated", ""))
+          archived          = headline["archived_count"]
+          archived_measured = headline.get("_archived_measured", canon.get("updated", ""))
+
+          pulse_size     = pulse["universe_size"]
+          pulse_measured = pulse.get("measured", canon.get("updated", ""))
+
+          deps          = sec["dependabot_repos"]
+          ql            = sec["codeql_repos"]
+          sc            = sec["scorecard_repos"]
+          sha           = sec["sha_pinned_uses_lines"]
+          sec_measured  = sec.get("measured", canon.get("updated", ""))
 
           # Pulse universe pretty-formats with thousands separator (matches apex output).
           pulse_fmt = f"{pulse_size:,}"
@@ -84,11 +95,11 @@ jobs:
           # Equivalent of apex generate.py output, condensed for inline single-line splice.
           PAYLOADS = {
               "v1-prod-count":
-                  f'<span class="kg-v1prod-num" data-measured="{measured}">{v1_prod}</span>',
+                  f'<span class="kg-v1prod-num" data-measured="{v1_prod_measured}">{v1_prod}</span>',
               "archived-count":
-                  f'<span class="kg-archived-num" data-measured="{measured}">{archived}</span>',
+                  f'<span class="kg-archived-num" data-measured="{archived_measured}">{archived}</span>',
               "pulse-universe-count":
-                  f'<span class="kg-pulse-universe" data-measured="{measured}">{pulse_fmt}</span>',
+                  f'<span class="kg-pulse-universe" data-measured="{pulse_measured}">{pulse_fmt}</span>',
               # Security-stats: same prose shape as apex security-stats-inline.md but
               # already in HTML (skips the MD->HTML transform step).
               "security-stats-inline":
@@ -96,7 +107,7 @@ jobs:
                   f'CodeQL on <strong>{ql}</strong> · '
                   f'OpenSSF Scorecard on <strong>{sc}</strong> (strict subset of CodeQL) · '
                   f'SHA-pinned actions across <strong>{sha} <code>uses:</code> lines</strong> '
-                  f'(measured {measured}).',
+                  f'(measured {sec_measured}).',
           }
 
           target = pathlib.Path("index.html")
